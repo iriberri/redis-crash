@@ -53,8 +53,8 @@ func main() {
 	fmt.Println("L#84UQA - JOB_COUNT is         :", vars.messageCount)
 
 	redisPool := &redis.Pool{
-		MaxActive: 5,
-		MaxIdle:   5,
+		MaxActive: 25,
+		MaxIdle:   25,
 		Wait:      true,
 		Dial: func() (redis.Conn, error) {
 			return redis.DialURL(vars.redisUrl, redis.DialTLSSkipVerify(true))

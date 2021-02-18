@@ -18,7 +18,9 @@ Change the `REDIS_BG_URL` value to test different Redis installations.
 # How to run the programs
 **NOTE**: Please make sure that both the worker and the enqueuer are using the same Redis installation.
 
-You should run one worker (to consume) and 5+ enqueuers at the same time (don't just increase the job count, increase the number of **simultaneous enqueuers**). 
+You should run one worker (to consume) and 5+ enqueuers at the same time (don't just increase the job count, increase the number of **simultaneous enqueuers**).
+
+**NOTE 2**: Either that or you can increase the number of connections in the pool near the max connections limit and run it.
 
 In fact, the worker is optional; the only purpose it would serve for this demo is to drain the jobs so that Redis server does not fill up. We are not encountering any issues with the worker. It's the enqueueing that fails.
 
@@ -32,3 +34,7 @@ E#7X6OQ - Could not enqueue: read tcp 192.168.29.50:56565->52.22.235.152:9390: r
 In your own run, the source IP address (`192.168.29.50`) should be something different. 
 
 This never happened with any other Redis installation we tested. SSL/TLS connection does not seem to be the issue, neither does it look like it is because of the client connections count (it never crossed 16 from what I can see in the Heroku Dashboard).
+
+# Metrics
+
+Heroku dashboard never shows us hitting the connection limit though!
